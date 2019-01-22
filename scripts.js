@@ -59,29 +59,36 @@ function filterCountries(allCountries, footprintCountries) {
 }
 
 // populate map with final array and fill styles
+var geojson;
 function populateMap(filledCountries) {
-  L.geoJson(filledCountries, {style: style})
-    .on("mouseover", function(e) { highlightFeature(e); })
-    .on("mouseout", function(e) { resetHighlight(e); })
-    .addTo(map);
+  geojson = L.geoJson(filledCountries, {
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
+}
+
+// listen for map events
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+    });
 }
 
 // highlight on mouseover
 function highlightFeature(e) {
-  const feature = e.propagatedFrom;
+    var layer = e.target;
 
-  feature.setStyle({
-    fillColor: "forestgreen"
-  });
+    layer.setStyle({
+        fillColor: "forestgreen",
+    });
 
-  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-    feature.bringToFront();
-  }
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
 }
 
 // reset on mouseout
 function resetHighlight(e) {
-  const geojson = e.target;
-
-  geojson.resetStyle(e.propagatedFrom);
+    geojson.resetStyle(e.target);
 }
