@@ -1,10 +1,10 @@
 # been
 
-![Size](https://img.shields.io/github/code-size/robinmetral/been.svg)
+![Size](https://img.shields.io/github/languages/code-size/robinmetral/been.svg)
 [![Open issues](https://img.shields.io/github/issues-raw/robinmetral/been.svg)](https://github.com/robinmetral/been/issues)
-[![Good first issues](https://img.shields.io/github/issues-raw/robinmetral/been/good+first+issue.svg)](https://github.com/robinmetral/been/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+[![Good first issues](https://img.shields.io/github/issues-raw/robinmetral/been/good first issue.svg)](https://github.com/robinmetral/been/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
 ![Licence](https://img.shields.io/github/license/robinmetral/been.svg)
-![Fork](https://img.shields.io/github/forks/robinmetral/been.svg?label=Fork&style=social)]
+![Fork](https://img.shields.io/github/forks/robinmetral/been.svg?label=Fork&style=social)
 ![Contributors](https://img.shields.io/github/contributors/robinmetral/been.svg)
 ![Latest commit](https://img.shields.io/github/last-commit/robinmetral/been.svg)
 
