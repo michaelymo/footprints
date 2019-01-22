@@ -21,39 +21,39 @@ const style = {
     fillOpacity: 0.7
 }
 
-// fetch been json object
-let beenCountries = [];
-fetch("./been.json")
+// fetch footprint json object
+let footprintCountries = [];
+fetch("./footprint.json")
   .then(response => {
     return response.json();
   }).then(json => {
     // make array of visited countries
-    beenCountries.push(...json.been);
+    footprintCountries.push(...json.footprint);
     // call getGeometry function
-    getGeometry(beenCountries);
+    getGeometry(footprintCountries);
   }).catch(err => {
     console.log("There was an error while fetching the visited countries");
   });
 
 // fetch geojson countries geometry
 let allCountries = {};
-function getGeometry(beenCountries) {
+function getGeometry(footprintCountries) {
 fetch("./countries.geojson")
   .then(response => {
     return response.json();
   }).then(json => {
     allCountries = Object.assign({}, json);
-    filterCountries(allCountries, beenCountries);
+    filterCountries(allCountries, footprintCountries);
   }).catch(err => {
     console.log("There was an error while fetching the countries geometry.");
   });
 }
 
-// filter allCountries with beenCountries
+// filter allCountries with footprintCountries
 let filledCountries = []
-function filterCountries(allCountries, beenCountries) {
+function filterCountries(allCountries, footprintCountries) {
   // fileter with filter() and includes()
-  filledCountries = allCountries.features.filter(country => beenCountries.includes(country.properties.ISO_A3));
+  filledCountries = allCountries.features.filter(country => footprintCountries.includes(country.properties.ISO_A3));
   // call populateMap function
   populateMap(filledCountries);
 }
