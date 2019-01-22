@@ -13,12 +13,12 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token="
 
 // define fill style
 const style = {
-    fillColor: "lightgreen",
-    weight: 2,
-    opacity: 1,
-    color: "white",
-    dashArray: "2",
-    fillOpacity: 0.7
+  fillColor: "lightgreen",
+  weight: 2,
+  opacity: 1,
+  color: "white",
+  dashArray: "2",
+  fillOpacity: 0.7
 }
 
 // fetch footprint json object
@@ -38,15 +38,15 @@ fetch("./footprint.json")
 // fetch geojson countries geometry
 let allCountries = {};
 function getGeometry(footprintCountries) {
-fetch("./countries.geojson")
-  .then(response => {
-    return response.json();
-  }).then(json => {
-    allCountries = Object.assign({}, json);
-    filterCountries(allCountries, footprintCountries);
-  }).catch(err => {
-    console.log("There was an error while fetching the countries geometry.");
-  });
+  fetch("./countries.geojson")
+    .then(response => {
+      return response.json();
+    }).then(json => {
+      allCountries = Object.assign({}, json);
+      filterCountries(allCountries, footprintCountries);
+    }).catch(err => {
+      console.log("There was an error while fetching the countries geometry.");
+    });
 }
 
 // filter allCountries with footprintCountries
@@ -61,4 +61,20 @@ function filterCountries(allCountries, footprintCountries) {
 // populate map with final array and fill styles
 function populateMap(filledCountries) {
   L.geoJson(filledCountries, {style: style}).addTo(map);
+}
+
+// highlight on mouseover
+function highlightFeature(e) {
+  let layer = e.target;
+
+  layer.setStyle({
+    weight: 5,
+    color: "#666",
+    dashArray: "",
+    fillOpacity: 0.7
+  });
+
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    layer.bringToFront();
+  }
 }
