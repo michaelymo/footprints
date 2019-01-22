@@ -11,12 +11,24 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token="
   id: "mapbox.light",
 }).addTo(map);
 
+// HERE, RUN THE GEOJSON OBJECT AGAINST AN OBJECT OF COUNTRIES VISITED
+
+// fill style
+const style = {
+    fillColor: "lightgreen",
+    weight: 2,
+    opacity: 1,
+    color: "white",
+    dashArray: "2",
+    fillOpacity: 0.7
+}
+
 // fetch geojson countries geometry
 fetch("./countries.geojson")
   .then(response => {
     return response.json();
   }).then(data => {
-    L.geoJson(data).addTo(map);
+    L.geoJson(data, {style: style}).addTo(map);
   }).catch(err => {
     console.log("There was an error.");
   });
