@@ -60,18 +60,16 @@ function filterCountries(allCountries, footprintCountries) {
 
 // populate map with final array and fill styles
 function populateMap(filledCountries) {
-  L.geoJson(filledCountries, {style: style}).addTo(map);
+  L.geoJson(filledCountries, {style: style}).on("mouseover", function(e) {highlightCountry(e);}).addTo(map);
 }
 
 // highlight on mouseover
-function highlightFeature(e) {
-  let layer = e.target;
+function highlightCountry(e) {
+  let layer = e.propagatedFrom;
+  console.log(layer);
 
   layer.setStyle({
-    weight: 5,
-    color: "#666",
-    dashArray: "",
-    fillOpacity: 0.7
+    fillColor: "forestgreen"
   });
 
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
