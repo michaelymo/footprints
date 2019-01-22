@@ -61,13 +61,13 @@ function filterCountries(allCountries, footprintCountries) {
 // populate map with final array and fill styles
 function populateMap(filledCountries) {
   L.geoJson(filledCountries, {style: style})
-    .on("mouseover", function(e) { highlightCountry(e); })
+    .on("mouseover", function(e) { highlightFeature(e); })
     .on("mouseout", function(e) { resetHighlight(e); })
     .addTo(map);
 }
 
 // highlight on mouseover
-function highlightCountry(e) {
+function highlightFeature(e) {
   const feature = e.propagatedFrom;
 
   feature.setStyle({
