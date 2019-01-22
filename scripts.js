@@ -11,9 +11,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token="
   id: "mapbox.light",
 }).addTo(map);
 
-// HERE, RUN THE GEOJSON OBJECT AGAINST AN OBJECT OF COUNTRIES VISITED
-
-// fill style
+// define fill style
 const style = {
     fillColor: "lightgreen",
     weight: 2,
@@ -23,12 +21,44 @@ const style = {
     fillOpacity: 0.7
 }
 
+// fetch been json object
+let beenCountries = [];
+fetch("./been.json")
+  .then(response => {
+    return response.json();
+  }).then(json => {
+    // make array of visited countries
+    beenCountries.push(...json.been);
+    // call getGeometry function
+    getGeometry(beenCountries);
+  }).catch(err => {
+    console.log("There was an error while fetching the visited countries");
+  });
+
 // fetch geojson countries geometry
+let allCountries = {};
+function getGeometry(beenCountries) {
 fetch("./countries.geojson")
   .then(response => {
     return response.json();
-  }).then(data => {
-    L.geoJson(data, {style: style}).addTo(map);
+  }).then(json => {
+    allCountries = Object.assign({}, json);
+    filterCountries(allCountries, beenCountries);
   }).catch(err => {
-    console.log("There was an error.");
+    console.log("There was an error while fetching the countries geometry.");
   });
+}
+
+// filter allCountries with beenCountries
+let filledCountries = []
+function filterCountries(allCountries, beenCountries) {
+  // fileter with filter() and includes()
+  filledCountries = allCountries.features.filter(country => beenCountries.includes(country.properties.ISO_A3));
+  // call populateMap function
+  populateMap(filledCountries);
+}
+
+// populate map with final array and fill styles
+function populateMap(filledCountries) {
+  L.geoJson(filledCountries, {style: style}).addTo(map);
+}
