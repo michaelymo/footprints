@@ -21,39 +21,39 @@ const style = {
   fillOpacity: 0.7
 }
 
-// fetch footprint json object
-let footprintCountries = [];
-fetch("./footprint.json")
+// fetch footprints json object
+let footprintsCountries = [];
+fetch("./footprints.json")
   .then(response => {
     return response.json();
   }).then(json => {
     // make array of visited countries
-    footprintCountries.push(...json.footprint);
+    footprintsCountries.push(...json.footprints);
     // call getGeometry function
-    getGeometry(footprintCountries);
+    getGeometry(footprintsCountries);
   }).catch(err => {
     console.log("There was an error while fetching the visited countries");
   });
 
 // fetch geojson countries geometry
 let allCountries = {};
-function getGeometry(footprintCountries) {
+function getGeometry(footprintsCountries) {
   fetch("./countries.geojson")
     .then(response => {
       return response.json();
     }).then(json => {
       allCountries = Object.assign({}, json);
-      filterCountries(allCountries, footprintCountries);
+      filterCountries(allCountries, footprintsCountries);
     }).catch(err => {
       console.log("There was an error while fetching the countries geometry.");
     });
 }
 
-// filter allCountries with footprintCountries
+// filter allCountries with footprintsCountries
 let filledCountries = []
-function filterCountries(allCountries, footprintCountries) {
+function filterCountries(allCountries, footprintsCountries) {
   // fileter with filter() and includes()
-  filledCountries = allCountries.features.filter(country => footprintCountries.includes(country.properties.ISO_A3));
+  filledCountries = allCountries.features.filter(country => footprintsCountries.includes(country.properties.ISO_A3));
   // call populateMap function
   populateMap(filledCountries);
 }
