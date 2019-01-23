@@ -59,7 +59,7 @@ function filterCountries(allCountries, footprintCountries) {
 }
 
 // populate map with final array and fill styles
-var geojson;
+let geojson;
 function populateMap(filledCountries) {
   geojson = L.geoJson(filledCountries, {
     style: style,
@@ -69,26 +69,51 @@ function populateMap(filledCountries) {
 
 // listen for map events
 function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-    });
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight,
+  });
 }
 
 // highlight on mouseover
 function highlightFeature(e) {
-    var layer = e.target;
+  let layer = e.target;
 
-    layer.setStyle({
-        fillColor: "forestgreen",
-    });
+  layer.setStyle({
+    fillColor: "forestgreen",
+  });
 
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    layer.bringToFront();
+  }
+
+  info.update(layer.feature.properties.ADMIN);
 }
 
 // reset on mouseout
 function resetHighlight(e) {
-    geojson.resetStyle(e.target);
+  // reset styles
+  geojson.resetStyle(e.target);
+  // reset info control
+  info.update();
 }
+
+// show country name in an info control
+// Leaflet controls: https://leafletjs.com/reference.html#control
+let info = L.control();
+
+info.onAdd = function (map) {
+  this._div = L.DomUtil.create("div", "info"); // create a div with a class "info"
+  this.update();
+  return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (hoveredCountry) {
+  this._div.innerHTML = "<h4>J'ai voyagé dans X pays</h4>"
+    +  (hoveredCountry ?
+    "<strong>" + hoveredCountry + "</strong>"
+    : "Survolez un pays");
+};
+
+info.addTo(map);
