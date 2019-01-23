@@ -15,7 +15,7 @@
 
 ## Contributing
 
-:arrowright: [CONTRIBUTING.md](https://github.com/robinmetral/footprints/blob/master/CONTRIBUTING.md)
+:arrow_right: [CONTRIBUTING.md](https://github.com/robinmetral/footprints/blob/master/CONTRIBUTING.md)
 
 ## Thanks
 
