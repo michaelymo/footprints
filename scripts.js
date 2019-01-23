@@ -59,7 +59,7 @@ function filterCountries(allCountries, footprintCountries) {
 }
 
 // populate map with final array and fill styles
-var geojson;
+let geojson;
 function populateMap(filledCountries) {
   geojson = L.geoJson(filledCountries, {
     style: style,
@@ -77,7 +77,7 @@ function onEachFeature(feature, layer) {
 
 // highlight on mouseover
 function highlightFeature(e) {
-    var layer = e.target;
+    let layer = e.target;
 
     layer.setStyle({
         fillColor: "forestgreen",
@@ -92,3 +92,6 @@ function highlightFeature(e) {
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
 }
+
+// show country name in an info control
+
