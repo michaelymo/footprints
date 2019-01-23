@@ -86,11 +86,16 @@ function highlightFeature(e) {
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
     layer.bringToFront();
   }
+
+  info.update(layer.feature.properties.ADMIN);
 }
 
 // reset on mouseout
 function resetHighlight(e) {
+  // reset styles
   geojson.resetStyle(e.target);
+  // reset info control
+  info.update();
 }
 
 // show country name in an info control
