@@ -1,6 +1,6 @@
 # 10 steps to contributing
 
- 1. Find an [open issue](https://github.com/robinmetral/footprints/issues) you'd like to work on (:information_sign: if this is your first time contributing, have a look at [issues tagged "good first issue"](https://github.com/robinmetral/footprints/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+ 1. Find an [open issue](https://github.com/robinmetral/footprints/issues) you'd like to work on (:information_source: if this is your first time contributing, have a look at [issues tagged "good first issue"](https://github.com/robinmetral/footprints/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
  2. Comment on the issue saying that you'd like to work on it
  3. Fork the repo
  4. Clone your fork to work on it locally
