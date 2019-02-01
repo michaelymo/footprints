@@ -1,5 +1,5 @@
 // set default map view
-const map = L.map("mapid").setView([44, 12], 2);
+const map = L.map("mapid").setView([25, 12], 3);
 
 // mapbox public access token
 const mapboxToken = "pk.eyJ1Ijoicm9iaW5tZXRyYWwiLCJhIjoiY2pkMTI0bWVnMmV6dzM0bnNhZHBvMDBqeiJ9.Z0gZrvkth24hNkLkvRxg-g";
@@ -108,9 +108,14 @@ info.onAdd = function (map) {
   return this._div;
 };
 
+// calculate number of countries visited from json
+let numberOfCountries = 10;
+//var numberFootprintsCountries = JSON.parse(footprints.json);
+//let numberOfCountries = numberFootprintsCountries.keys(data.footprints[i]).length;
+
 // method that we will use to update the control based on feature properties passed
 info.update = function (hoveredCountry) {
-  this._div.innerHTML = "<h4>J'ai voyagé dans X pays</h4>"
+  this._div.innerHTML = "<h4>J'ai voyagé dans " + numberOfCountries +" pays</h4>"
     +  (hoveredCountry ?
     "<strong>" + hoveredCountry + "</strong>"
     : "Survolez un pays");
