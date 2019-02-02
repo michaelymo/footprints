@@ -109,12 +109,10 @@ info.onAdd = function (map) {
 };
 
 // calculate number of countries visited from json
-let numberOfCountries = 10;
-//var numberFootprintsCountries = JSON.parse(footprints.json);
-//let numberOfCountries = numberFootprintsCountries.keys(data.footprints[i]).length;
+const numberOfCountries = footprintsCountries.length;
 
-// method that we will use to update the control based on feature properties passed
-info.update = function (hoveredCountry) {
+// update control box with number of countries and hovered country name
+info.update = function (hoveredCountry, numberOfCountries) {
   this._div.innerHTML = "<h4>J'ai voyagé dans " + numberOfCountries +" pays</h4>"
     +  (hoveredCountry ?
     "<strong>" + hoveredCountry + "</strong>"
