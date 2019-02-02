@@ -108,12 +108,9 @@ info.onAdd = function (map) {
   return this._div;
 };
 
-// calculate number of countries visited from json
-const numberOfCountries = footprintsCountries.length;
-
 // update control box with number of countries and hovered country name
-info.update = function (hoveredCountry, numberOfCountries) {
-  this._div.innerHTML = "<h4>J'ai voyagé dans " + numberOfCountries +" pays</h4>"
+info.update = function (hoveredCountry, footprintCountries) {
+  this._div.innerHTML = "<h4>J'ai voyagé dans " + footprintsCountries.length + " pays</h4>"
     +  (hoveredCountry ?
     "<strong>" + hoveredCountry + "</strong>"
     : "Survolez un pays");
